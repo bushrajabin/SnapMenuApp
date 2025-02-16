@@ -8,8 +8,7 @@ import {
 } from "react-native";
 import { router } from "expo-router";
 import ToggleSwitch from "toggle-switch-react-native";
-import Icon from "react-native-vector-icons/AntDesign";
-import NavSideBar from "@/components/NavSideBar";
+import AntDesign from '@expo/vector-icons/AntDesign';import NavSideBar from "@/components/NavSideBar";
 
 interface RestaurentSetting {
   title: string;
@@ -20,17 +19,17 @@ interface RestaurentSetting {
 const RestaurentSetting: RestaurentSetting[] = [
   {
     title: "Table Settings",
-    Icon: <Icon name="right" size={23} />,
+    Icon: <AntDesign name="right" size={24} color="black" />,
     path: "/RestaurantSettingPage/TableSetting",
   },
   {
     title: "Manager Members",
-    Icon: <Icon name="right" size={23} />,
+    Icon: <AntDesign name="right" size={24} color="black" />,
     path: "/RestaurantSettingPage/ManageMember",
   },
   {
     title: "In-House Delivery",
-    Icon: <Icon name="right" size={23} />,
+    Icon: <AntDesign name="right" size={24} color="black" />,
     path: "/RestaurantSettingPage/InHouseDelivery",
   },
 ];

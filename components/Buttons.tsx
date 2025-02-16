@@ -1,4 +1,3 @@
-import { Colors } from "@/constants/Colors";
 import React from "react";
 import { Text, TouchableOpacity, StyleSheet } from "react-native";
 
@@ -23,18 +22,18 @@ const Styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     textAlign: "center",
-    backgroundColor: Colors.dark.background,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    borderRadius: 30,
+    borderRadius: 10,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.8,
+    shadowOpacity: 8,
     shadowRadius: 2,
+    backgroundColor:"black",
   },
   buttonText: {
-    color: Colors.dark.text,
     fontWeight: "bold",
     fontSize: 15,
+    color:"white",
   },
 });

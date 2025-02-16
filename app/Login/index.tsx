@@ -11,10 +11,10 @@ const logoImage = require("../../assets/images/snapmenuDark.png");
 import { useRouter } from "expo-router";
 import Buttons from "@/components/Buttons";
 import UserInput from "@/components/UserInput";
-import Icon from "react-native-vector-icons/AntDesign";
+// import Icon from "react-native-vector-icons/AntDesign";
+import AntDesign from '@expo/vector-icons/AntDesign';
 import GoogleAuth from "@/components/GoogleAuth";
-import { Colors } from "@/constants/Colors";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 // FOR google authee---
 
 export default function Login() {
@@ -32,6 +32,9 @@ export default function Login() {
       Alert.alert("Error", "Please fill in both fields.");
     }
   };
+
+  const insets = useSafeAreaInsets();
+
   return (
     <SafeAreaView style={styles.container}>
       {/* Login Header */}
@@ -65,9 +68,8 @@ export default function Login() {
           <Text style={styles.continueWith}>------Or continue with------</Text>
           {/* <TouchableOpacity style={styles.GoogleIcon} onPress={GoogleLogin}> */}
           <TouchableOpacity style={styles.GoogleIcon}>
-            <Icon name="google" size={18} />
-            <GoogleAuth />
-            {/* <Text style={styles.googleText}>Google</Text> */}
+            <AntDesign name="google" size={24} color="black" />
+            <Text style={styles.googleText}><GoogleAuth /></Text>
           </TouchableOpacity>
 
           {/* Create New Account Option */}
@@ -82,27 +84,26 @@ export default function Login() {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor:"black",
     flex: 1,
-    backgroundColor: Colors.dark.background,
-    boxSizing: "border-box"
   },
   topContainer: {
-    backgroundColor: Colors.dark.background,
     paddingHorizontal: 50,
     paddingVertical: 30,
+    backgroundColor:"black"
   },
   logoImage: {
     width: "100%",
+    height:100,
     resizeMode: "contain",
   },
   text: {
-    color: Colors.light.text,
     fontSize: 27,
     fontWeight: "bold",
     textAlign: "center",
   },
   inputContainer: {
-    backgroundColor: Colors.light.background,
+    backgroundColor:"white",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     paddingTop: 90,
@@ -110,11 +111,10 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingBottom: 110,
     borderTopStartRadius: 30,
-    borderTopEndRadius: 30
+    borderTopEndRadius: 30,
   },
   forgotPassword: {
     textAlign: "right",
-    color: Colors.light.text,
     marginTop: 10,
     paddingRight: 10,
   },
@@ -124,7 +124,6 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   continueWith: {
-    color: Colors.light.text,
     fontSize: 15,
     textAlign: "center",
   },
@@ -144,12 +143,12 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
   },
   newAccount: {
-    color: Colors.light.text,
     textAlign: "center",
     paddingTop: 6,
   },
   button: {
     marginHorizontal: 90,
     marginTop: 10,
+    // backgroundColor:"green"
   },
 });

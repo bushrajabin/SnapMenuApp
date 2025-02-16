@@ -10,14 +10,12 @@ import {
   ScrollView,
 } from "react-native";
 import { router } from "expo-router";
-import Icon from "react-native-vector-icons/AntDesign";
 const logoimage = require("../../assets/images/snapLogo.png");
 import Buttons from "@/components/Buttons";
 const MenuIcon = require("../../assets/images/hamburger.png");
 const MenuImage = require("../../assets/images/MenuImage.png");
 import * as ImagePicker from "expo-image-picker";
 import UserInput from "@/components/UserInput";
-import { Colors } from "@/constants/Colors";
 
 // Define the type for a menu item
 interface MenuItem {
@@ -148,7 +146,7 @@ export default function AddMenu(props: MenuItem) {
           value={category}
           onChangeText={(text) => setCategory(text)}
         />
-        <Icon name="delete" size={20} />
+        {/* <Icon name="delete" size={20} /> */}
       </View>
 
       {isMenuSaved ? (
@@ -229,7 +227,7 @@ export default function AddMenu(props: MenuItem) {
                   <Text style={Styles.uploadText}>Upload Cover Image</Text>
                   <TouchableOpacity onPress={uploadImage}>
                     <View style={Styles.uploadIcon}>
-                      <Icon name="upload" size={10} color={"white"} />
+                      {/* <Icon name="upload" size={10} color={"white"} /> */}
                       <Text style={Styles.uploadFileText}>Upload File</Text>
                     </View>
                   </TouchableOpacity>
@@ -255,7 +253,6 @@ export default function AddMenu(props: MenuItem) {
 const Styles = StyleSheet.create({
   MenuMainContainer: {
     flex: 1,
-    backgroundColor: Colors.light.background,
   },
   TopContainer: {
     flexDirection: "row",
@@ -269,7 +266,6 @@ const Styles = StyleSheet.create({
     marginHorizontal: 30
   },
   manuIconDiv: {
-    backgroundColor: Colors.light.background,
     width: 70,
     alignItems: "center",
     borderBottomLeftRadius: 20,

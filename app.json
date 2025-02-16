@@ -8,6 +8,19 @@
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "extra": {
+      "FIREBASE_API_KEY": "AIzaSyCvYIItcOvm_437MZKqT-g9ZQ5BSvYJ1ZI",
+      "FIREBASE_DOMAIN": "snapmenuapp01.firebaseapp.com",
+      "FIREBASE_PROJECT_ID": "snapmenuapp01",
+      "ANDROID_CLIENT_ID": "552066681932-249fg42cd8006g7opg1qav0ibevf97c1.apps.googleusercontent.com",
+      "WEB_CLIENT_ID":"552066681932-h8pg2jr5peeh8n3t3qsi3cti8q7rrlr3.apps.googleusercontent.com",
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "5d60334f-c682-4eb7-b93d-e7ac70b5ee1e"
+      }
+    },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.jabin78.SnapMenuApp",
@@ -37,18 +50,11 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
-      ]
+      ],
+      "expo-secure-store"
     ],
     "experiments": {
       "typedRoutes": true
-    },
-    "extra": {
-      "router": {
-        "origin": false
-      },
-      "eas": {
-        "projectId": "5d60334f-c682-4eb7-b93d-e7ac70b5ee1e"
-      }
     }
   }
 }

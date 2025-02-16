@@ -6,7 +6,7 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import Icon from "react-native-vector-icons/AntDesign";
+import AntDesign from '@expo/vector-icons/AntDesign';
 import { router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 const logoimage = require("../assets/images/snapLogo.png"); interface Items {
@@ -17,31 +17,30 @@ const logoimage = require("../assets/images/snapLogo.png"); interface Items {
 
 const SideBarItems: Items[] = [
   {
-    icon: <Icon name="home" size={20} color={"white"} />,
+    icon: <AntDesign name="googleplus" size={24} color="black" />,
     title: "Home",
     link: "/HomePage",
   },
   {
-    icon: <Icon name="qrcode" size={20} color={"white"} />,
-    title: "QR-code",
+    icon: <AntDesign name="googleplus" size={24} color="black" />, title: "QR-code",
     link: "/QRCode",
   },
   {
-    icon: <Icon name="filetext1" size={20} color={"white"} />,
+    icon: <AntDesign name="googleplus" size={24} color="black" />,
     title: "Orders",
     link: "/Orders",
   },
   {
-    icon: <Icon name="creditcard" size={20} color={"white"} />,
+    icon: <AntDesign name="googleplus" size={24} color="black" />,
     title: "Payment",
   },
   {
-    icon: <Icon name="question" size={20} color={"white"} />,
+    icon: <AntDesign name="googleplus" size={24} color="black" />,
     title: "Contact-us",
     link: "https://www.snapmenu.in/#contact-us",
   },
   {
-    icon: <Icon name="setting" size={20} color={"white"} />,
+    icon: <AntDesign name="googleplus" size={24} color="black" />,
     title: "Restaurant settings",
     link: "/RestaurantSettingPage",
   },
@@ -54,7 +53,7 @@ export default function NavSideBar({ title }: { title: string }) {
   return (
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.navbar}>
-        <Icon
+        <AntDesign
           name="arrowleft"
           size={18}
           style={styles.arrowLeft}
@@ -62,7 +61,7 @@ export default function NavSideBar({ title }: { title: string }) {
         />
         <Text style={styles.text}>{title}</Text>
         <TouchableOpacity onPress={toggleSidebar} style={styles.menuIcon}>
-          <Icon name="bars" size={25} color="white" />
+          <AntDesign name="bars" size={25} color="white" />
         </TouchableOpacity>
       </View>
 
@@ -91,7 +90,7 @@ export default function NavSideBar({ title }: { title: string }) {
               </TouchableOpacity>
             ))}
             <TouchableOpacity style={styles.logoutButton}>
-              <Icon name="logout" size={20} color="red" />
+              <AntDesign name="logout" size={20} color="red" />
               <Text style={styles.logoutText}>Log Out</Text>
             </TouchableOpacity>
 
@@ -148,7 +147,7 @@ const styles = StyleSheet.create({
     backgroundColor: "red",
     paddingBottom: 100,
     elevation: 1,
-    zIndex:1
+    zIndex: 1
   },
   SideBarItemsContainer: {
     paddingTop: 60,

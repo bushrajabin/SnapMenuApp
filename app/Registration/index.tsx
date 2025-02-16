@@ -11,9 +11,7 @@ import { Link, useRouter } from "expo-router";
 import Buttons from "@/components/Buttons";
 import UserInput from "@/components/UserInput";
 const logoImage = require("../../assets/images/snapmenuDark.png");
-import Icon from "react-native-vector-icons/AntDesign";
-import { Colors } from "@/constants/Colors";
-
+import AntDesign from '@expo/vector-icons/AntDesign';
 export default function Registration() {
   const [userEmail, setUserEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -59,7 +57,7 @@ export default function Registration() {
           <TouchableOpacity style={styles.GoogleIcon}>
             <Text style={styles.GoogleText}>
               {" "}
-              <Icon name="google" size={18} /> Google
+              <AntDesign name="google" size={18} /> Google
             </Text>
           </TouchableOpacity>
 
@@ -76,10 +74,9 @@ export default function Registration() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.dark.background,
+    backgroundColor:"black",
   },
   topContainer: {
-    backgroundColor: Colors.dark.background,
     paddingHorizontal: 50,
     paddingVertical: 40,
   },
@@ -88,7 +85,6 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   text: {
-    color: Colors.light.text,
     fontSize: 20,
     marginVertical: 10,
     fontWeight: "bold",
@@ -96,19 +92,19 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   inputContainer: {
-    backgroundColor: Colors.light.background,
+    backgroundColor:"white",
     width: "100%",
     height: "100%",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     paddingTop: 30,
+    
   },
   continueWithContainer: {
     alignItems: "center",
     gap: 10,
   },
   continueWith: {
-    color: Colors.light.text,
     fontSize: 15,
     textAlign: "center",
     paddingTop: 5,

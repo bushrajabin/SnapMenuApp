@@ -1,9 +1,6 @@
 import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 import { useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Colors } from "@/constants/Colors";
-
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useColorScheme } from "react-native";
 
 
@@ -20,12 +17,8 @@ const buttons: links[] = [
 
 export default function Screen() {
   const router = useRouter();
-  const colorScheme = useColorScheme()
   return (
-    <SafeAreaView style={[styles.container, {
-      // backgroundColor:"red"
-      backgroundColor: colorScheme === "light" ? DarkTheme.colors.background :DefaultTheme.colors.background 
-    }]} >
+    <SafeAreaView style={styles.container} >
       <View>
         <Image source={logoimage} style={styles.image} />
         <Text style={styles.text}>
@@ -64,9 +57,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
+    backgroundColor: "red"
   },
   text: {
-    color: Colors.light.text,
+    // color: Colors.light.text,
     fontSize: 15,
     textAlign: "center",
   },
@@ -76,8 +70,6 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: "row",
-    marginTop: 180,
-    width: "100%",
     justifyContent: "space-evenly",
   },
   button: {
@@ -91,6 +83,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
+    marginTop: 80
   },
   loginButton: {
     backgroundColor: "green",
@@ -99,10 +92,40 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
   },
   buttonText: {
-    // color: Colors.dark.text,
     fontSize: 16,
   },
   registerButtonText: {
-    // color: Colors.light.text,
+    color: "black",
   },
 });
+
+
+
+// ---------
+
+// import { View, Text, StyleSheet, SafeAreaView } from 'react-native'
+// import React from 'react'
+
+// const index = () => {
+//   return (
+//     <SafeAreaView  style={style.container}>
+//       <Text style={style.text}>index</Text>
+//     </SafeAreaView>
+//   )
+// }
+
+// export default index;
+
+// const style = StyleSheet.create({
+//   container: {
+//     backgroundColor: "yellow",
+//     flex:1,
+//   },
+//   text:{
+//     backgroundColor:"red",
+//     textAlign:"center",
+//     alignItems:"center",
+//     justifyContent:"center",
+//     margin:'auto'
+//   }
+// })

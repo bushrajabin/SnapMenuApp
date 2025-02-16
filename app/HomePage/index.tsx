@@ -5,13 +5,13 @@ import { StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native";
 import Buttons from "@/components/Buttons";
 import NavSideBar from "@/components/NavSideBar";
-import { Colors } from "@/constants/Colors";
+// import { Colors } from "@/constants/Colors";
 const logoimage = require("../../assets/images/snapLogo.png");
 export default function HomePage() {
   const isDarkMode = useColorScheme() === "dark"
   return (
     // <SafeAreaView style={Styles.container}>
-    <SafeAreaView style={[Styles.container, { backgroundColor: isDarkMode ? Colors.light.background : Colors.dark.background }]}>
+    <SafeAreaView style={Styles.container}>
       <View style={Styles.TopContainer}>
         <Image source={logoimage} style={Styles.logoImage} />
         <NavSideBar title="" />
@@ -38,13 +38,12 @@ const Styles = StyleSheet.create({
   TopContainer: {
     display: "flex",
     flexDirection: "row",
-    // alignItems: "center",
+    alignItems: "center",
     justifyContent: "space-between",
-    // backgroundColor: "green"
   },
   logoImage: {
     width: "60%",
-    // height: 100,
+    height:"100%",
     objectFit: "contain",
   },
   Text: {
@@ -57,7 +56,7 @@ const Styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
-    backgroundColor: "red",
+    // backgroundColor: "red",
     alignItems: "center",
     margin: "auto",
     elevation:1,
