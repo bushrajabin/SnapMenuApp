@@ -1,8 +1,6 @@
 import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 import { useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useColorScheme } from "react-native";
-
 
 const logoimage = require("../assets/images/snapLogo.png");
 
@@ -17,8 +15,9 @@ const buttons: links[] = [
 
 export default function Screen() {
   const router = useRouter();
+
   return (
-    <SafeAreaView style={styles.container} >
+    <SafeAreaView style={styles.container}>
       <View>
         <Image source={logoimage} style={styles.image} />
         <Text style={styles.text}>
@@ -57,10 +56,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    backgroundColor: "red"
+    backgroundColor:"white"
   },
   text: {
-    // color: Colors.light.text,
     fontSize: 15,
     textAlign: "center",
   },
@@ -83,7 +81,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
-    marginTop: 80
+    marginTop: 80,
   },
   loginButton: {
     backgroundColor: "green",
@@ -98,34 +96,3 @@ const styles = StyleSheet.create({
     color: "black",
   },
 });
-
-
-
-// ---------
-
-// import { View, Text, StyleSheet, SafeAreaView } from 'react-native'
-// import React from 'react'
-
-// const index = () => {
-//   return (
-//     <SafeAreaView  style={style.container}>
-//       <Text style={style.text}>index</Text>
-//     </SafeAreaView>
-//   )
-// }
-
-// export default index;
-
-// const style = StyleSheet.create({
-//   container: {
-//     backgroundColor: "yellow",
-//     flex:1,
-//   },
-//   text:{
-//     backgroundColor:"red",
-//     textAlign:"center",
-//     alignItems:"center",
-//     justifyContent:"center",
-//     margin:'auto'
-//   }
-// })

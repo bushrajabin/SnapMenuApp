@@ -5,10 +5,11 @@ import {
   View,
   Image,
   TouchableOpacity,
+  SafeAreaView
 } from "react-native";
 import AntDesign from '@expo/vector-icons/AntDesign';
-import { router } from "expo-router";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { router, usePathname } from "expo-router";
+
 const logoimage = require("../assets/images/snapLogo.png"); interface Items {
   icon: React.JSX.Element;
   title: any;
@@ -17,12 +18,12 @@ const logoimage = require("../assets/images/snapLogo.png"); interface Items {
 
 const SideBarItems: Items[] = [
   {
-    icon: <AntDesign name="googleplus" size={24} color="black" />,
+    icon: <AntDesign name="home" size={24} color="black" />,
     title: "Home",
     link: "/HomePage",
   },
   {
-    icon: <AntDesign name="googleplus" size={24} color="black" />, title: "QR-code",
+    icon: <AntDesign name="qrcode" size={24} color="black" />, title: "QR-code",
     link: "/QRCode",
   },
   {
@@ -31,16 +32,16 @@ const SideBarItems: Items[] = [
     link: "/Orders",
   },
   {
-    icon: <AntDesign name="googleplus" size={24} color="black" />,
+    icon: <AntDesign name="wallet" size={24} color="black" />,
     title: "Payment",
   },
   {
-    icon: <AntDesign name="googleplus" size={24} color="black" />,
+    icon: <AntDesign name="contacts" size={24} color="black" />,
     title: "Contact-us",
     link: "https://www.snapmenu.in/#contact-us",
   },
   {
-    icon: <AntDesign name="googleplus" size={24} color="black" />,
+    icon: <AntDesign name="setting" size={24} color="black" />,
     title: "Restaurant settings",
     link: "/RestaurantSettingPage",
   },
@@ -50,74 +51,87 @@ export default function NavSideBar({ title }: { title: string }) {
   const toggleSidebar = () => {
     setIsSidebarVisible(!isSidebarVisible);
   };
+  const pathname = usePathname();
   return (
     <SafeAreaView style={styles.mainContainer}>
+      {/* common navbar for every page */}
       <View style={styles.navbar}>
-        <AntDesign
-          name="arrowleft"
-          size={18}
-          style={styles.arrowLeft}
-          onPress={() => router.back()}
-        />
+        {/*  conditionally Render arrow icon  */}
+        {pathname === "/HomePage" ? null :
+          <AntDesign
+            name="arrowleft"
+            size={18}
+            style={styles.arrowLeft}
+            onPress={() => router.back()}
+          />
+        }
         <Text style={styles.text}>{title}</Text>
         <TouchableOpacity onPress={toggleSidebar} style={styles.menuIcon}>
           <AntDesign name="bars" size={25} color="white" />
         </TouchableOpacity>
       </View>
 
-      {isSidebarVisible &&
-        <View style={[styles.sidebar, styles.boxWithShadow]}>
-          <View style={styles.logoImageContainer} >
-            <Image source={logoimage} style={styles.logoImage} />
-          </View>
-          <View style={styles.SideBarItemsContainer}>
+      {/* if user click on heburgermenu then showing this sidebar--- Home,Contact,etc.... */}
+      <View style={styles.sideBarMainContainer}>
 
-            {SideBarItems.map((item, index) => (
-              <TouchableOpacity
-                key={index}
-                style={styles.sidebarItem}
-                onPress={() => {
-                  if (item.link) {
-                    router.push(item.link);
-                  }
-                  toggleSidebar();
-                }}
-              >
-                <View style={styles.iconContainer}>
-                  <View style={styles.icon}>{item.icon}</View>
-                  <Text style={styles.sidebarText}>{item.title}</Text>
-                </View>
+        {isSidebarVisible &&
+          <View style={styles.sidebar}>
+            <View style={styles.logoImageContainer} >
+              <Image source={logoimage} style={styles.logoImage} />
+            </View>
+            <View style={styles.SideBarItemsContainer}>
+
+              {SideBarItems.map((item, index) => (
+                <TouchableOpacity
+                  key={index}
+                  style={styles.sidebarItem}
+                  onPress={() => {
+                    if (item.link) {
+                      router.push(item.link);
+                    }
+                    toggleSidebar();
+                  }}
+                >
+                  <View style={styles.iconContainer}>
+                    <View style={styles.icon}>{item.icon}</View>
+                    <Text style={styles.sidebarText}>{item.title}</Text>
+                  </View>
+                </TouchableOpacity>
+              ))}
+              <TouchableOpacity style={styles.logoutButton}>
+                <AntDesign name="logout" size={20} color="red" />
+                <Text style={styles.logoutText}>Log Out</Text>
               </TouchableOpacity>
-            ))}
-            <TouchableOpacity style={styles.logoutButton}>
-              <AntDesign name="logout" size={20} color="red" />
-              <Text style={styles.logoutText}>Log Out</Text>
-            </TouchableOpacity>
+
+            </View>
 
           </View>
 
-        </View>
-      }
+        }
+      </View>
+
+
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   mainContainer: {
-    backgroundColor: "white",
+    backgroundColor: "white"
   },
   navbar: {
     display: 'flex',
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingVertical: 20
+    paddingVertical: 10,
+    textAlign: "center"
   },
   arrowLeft: {
     marginHorizontal: 20,
     borderRadius: 2,
     borderWidth: 1,
-    padding: 2
+    height: 20
   },
   text: {
     fontWeight: "500",
@@ -141,10 +155,13 @@ const styles = StyleSheet.create({
     height: 90,
     objectFit: "contain",
   },
+  sideBarMainContainer: {
+    backgroundColor: "red"
+  },
   sidebar: {
     position: "absolute",
     right: 0,
-    backgroundColor: "red",
+    // backgroundColor: "red",
     paddingBottom: 100,
     elevation: 1,
     zIndex: 1
@@ -158,12 +175,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     borderBottomWidth: 1,
     borderBottomColor: "lightgray",
-  },
-  boxWithShadow: {
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.2,
-    shadowRadius: 9,
   },
   sidebarText: {
     marginLeft: 5,

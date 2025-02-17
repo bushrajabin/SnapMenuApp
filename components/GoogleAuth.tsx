@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Button, Text } from 'react-native';
 import { useIdTokenAuthRequest } from 'expo-auth-session/providers/google';
 import { signInWithCredential, GoogleAuthProvider, getAuth, User } from 'firebase/auth';
-import { app, androidClientId, webClientId } from '../firebaseConfig';
+import { app, androidClientId } from '../firebaseConfig';
 const auth = getAuth(app);
 
 const GoogleAuth = () => {
@@ -11,7 +11,6 @@ const GoogleAuth = () => {
   // Google Sign-In Request
   const [, googleResponse, promptAsync] = useIdTokenAuthRequest({
     selectAccount: true,
-    webClientId,
     androidClientId,
   });
 

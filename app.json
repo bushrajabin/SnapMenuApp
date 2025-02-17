@@ -13,7 +13,6 @@
       "FIREBASE_DOMAIN": "snapmenuapp01.firebaseapp.com",
       "FIREBASE_PROJECT_ID": "snapmenuapp01",
       "ANDROID_CLIENT_ID": "552066681932-249fg42cd8006g7opg1qav0ibevf97c1.apps.googleusercontent.com",
-      "WEB_CLIENT_ID":"552066681932-h8pg2jr5peeh8n3t3qsi3cti8q7rrlr3.apps.googleusercontent.com",
       "router": {
         "origin": false
       },

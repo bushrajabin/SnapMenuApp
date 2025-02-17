@@ -1,16 +1,12 @@
 import { router } from "expo-router";
-import React, { useState } from "react";
-import { SafeAreaView, Text, View, Image, Alert, useColorScheme } from "react-native";
+import { SafeAreaView, Text, View, Image } from "react-native";
 import { StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native";
 import Buttons from "@/components/Buttons";
 import NavSideBar from "@/components/NavSideBar";
-// import { Colors } from "@/constants/Colors";
 const logoimage = require("../../assets/images/snapLogo.png");
 export default function HomePage() {
-  const isDarkMode = useColorScheme() === "dark"
   return (
-    // <SafeAreaView style={Styles.container}>
     <SafeAreaView style={Styles.container}>
       <View style={Styles.TopContainer}>
         <Image source={logoimage} style={Styles.logoImage} />
@@ -30,7 +26,7 @@ export default function HomePage() {
 
 const Styles = StyleSheet.create({
   container: {
-    backgroundColor: "blue",
+    backgroundColor: "white",
     flex: 1,
     zIndex:-1,
     elevation:0
@@ -56,7 +52,6 @@ const Styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
-    // backgroundColor: "red",
     alignItems: "center",
     margin: "auto",
     elevation:1,
