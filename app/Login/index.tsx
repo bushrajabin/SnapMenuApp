@@ -11,30 +11,41 @@ const logoImage = require("../../assets/images/snapmenuDark.png");
 import { useRouter } from "expo-router";
 import Buttons from "@/components/Buttons";
 import UserInput from "@/components/UserInput";
-// import Icon from "react-native-vector-icons/AntDesign";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import GoogleAuth from "@/components/GoogleAuth";
-import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
-// FOR google authee---
+import { SafeAreaView } from "react-native-safe-area-context";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Login() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<any>("");
-  const [userInformation, setUserInformation] = useState();
   const router = useRouter();
 
-  //   const router = useRouter();
+  // Check if user is already logged in
+  useEffect(() => {
+    const checkLogin = async () => {
+      const user = await AsyncStorage.getItem("user");
+      if (user) {
+        // If user is logged in, navigate to home otherwise login page
+        router.push("/HomePage");
+      }
+    };
+    checkLogin();
+  }, [router]);
+
+  // handle login and save user info in asyncStorage 
   const handleLogin = () => {
     if (email && password) {
+      AsyncStorage.setItem("user", email);
       Alert.alert("Success", `Welcome back, ${email}!`);
-      router.navigate("/RegisterRestaurant");
+      if (email === email) {
+        router.push("/HomePage");
+      }
+      router.push("/RegisterRestaurant");
     } else {
       Alert.alert("Error", "Please fill in both fields.");
     }
   };
-
-  const insets = useSafeAreaInsets();
-
   return (
     <SafeAreaView style={styles.container}>
       {/* Login Header */}
@@ -66,15 +77,14 @@ export default function Login() {
         {/* Social Login Options */}
         <View style={styles.continueWithContainer}>
           <Text style={styles.continueWith}>------Or continue with------</Text>
-          {/* <TouchableOpacity style={styles.GoogleIcon} onPress={GoogleLogin}> */}
           <TouchableOpacity style={styles.GoogleIcon}>
             <AntDesign name="google" size={24} color="black" />
             <Text style={styles.googleText}><GoogleAuth /></Text>
           </TouchableOpacity>
 
           {/* Create New Account Option */}
-          <TouchableOpacity onPress={() => router.navigate("/Registration")}>
-            <Text style={styles.newAccount}>Don't have an account?Sign Up</Text>
+          <TouchableOpacity onPress={() => router.push("/Registration")}>
+            <Text style={styles.newAccount}>Don't have an account? Sign Up</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -84,17 +94,17 @@ export default function Login() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor:"black",
+    backgroundColor: "black",
     flex: 1,
   },
   topContainer: {
     paddingHorizontal: 50,
     paddingVertical: 30,
-    backgroundColor:"black"
+    backgroundColor: "black"
   },
   logoImage: {
     width: "100%",
-    height:100,
+    height: 100,
     resizeMode: "contain",
   },
   text: {
@@ -103,7 +113,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   inputContainer: {
-    backgroundColor:"white",
+    backgroundColor: "white",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     paddingTop: 90,
@@ -149,6 +159,5 @@ const styles = StyleSheet.create({
   button: {
     marginHorizontal: 90,
     marginTop: 10,
-    // backgroundColor:"green"
   },
 });

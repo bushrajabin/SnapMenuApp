@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { router, usePathname } from "expo-router";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const logoimage = require("../assets/images/snapLogo.png"); interface Items {
   icon: React.JSX.Element;
@@ -52,6 +53,13 @@ export default function NavSideBar({ title }: { title: string }) {
     setIsSidebarVisible(!isSidebarVisible);
   };
   const pathname = usePathname();
+
+
+  // LogOut user profile and delete data from asyncStorage
+  const logOut = async () => {
+    await AsyncStorage.removeItem("user");
+    router.push("/Login")
+  }
   return (
     <SafeAreaView style={styles.mainContainer}>
       {/* common navbar for every page */}
@@ -98,7 +106,7 @@ export default function NavSideBar({ title }: { title: string }) {
                   </View>
                 </TouchableOpacity>
               ))}
-              <TouchableOpacity style={styles.logoutButton}>
+              <TouchableOpacity style={styles.logoutButton} onPress={logOut}>
                 <AntDesign name="logout" size={20} color="red" />
                 <Text style={styles.logoutText}>Log Out</Text>
               </TouchableOpacity>
