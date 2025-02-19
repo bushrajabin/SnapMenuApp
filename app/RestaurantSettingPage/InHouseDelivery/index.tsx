@@ -4,16 +4,23 @@ import ToggleSwitch from "toggle-switch-react-native";
 import NavSideBar from "@/components/NavSideBar";
 import Buttons from "@/components/Buttons";
 import UserInput from "@/components/UserInput";
-import GetLocation from "@/components/getLocation";
 import { TouchableOpacity } from "react-native";
+import UserLocation from "@/components/UserLocation";
 const InHouseDelivery = () => {
   const [houseDeliver, setHouseDeliver] = useState<boolean>(false);
   const [isConfigure, setIsConfigure] = useState<boolean>(false);
   const [deliveryFee, setDeliveryFee] = useState<number>();
   const [orderValue, setOrderValue] = useState<number>();
-
   const [deliveryRadius, setDeliveryRadius] = useState<number>();
   const [deliveryHour, setDeliveryHour] = useState<string>("");
+  const [streetAddress, setStreetAddress] = useState<string>("");
+  const [city, setCity] = useState<string>("");
+  const [state, setState] = useState<string>("");
+  const [country, setCountry] = useState<string>("");
+  const [pinCode, setPinCode] = useState<number>();
+  const [latitude, setLatitude] = useState<number>(0);
+  const [longitude, setLongitude] = useState<number>(0)
+
 
   return (
     <SafeAreaView style={Styles.mainContainer}>
@@ -35,7 +42,7 @@ const InHouseDelivery = () => {
 
         {/* if ToggleSwitch is on then shwoing thiss */}
         {isConfigure && (
-          <View>
+          <View style={Styles.configureDelivery}>
             <View>
               <Text style={Styles.labelText}>Delivery Fee (₹)</Text>
               <UserInput
@@ -65,12 +72,71 @@ const InHouseDelivery = () => {
                 onChangeText={(value) => setDeliveryHour(value)}
               />
             </View>
+
             {/* Location settings */}
-            <TouchableOpacity>
-              <GetLocation />  
-              </TouchableOpacity>
+            <View>
+              <UserLocation />
+
+              <Text style={Styles.labelText}>Street Address:</Text>
+              <UserInput
+                placeholder="0"
+                value={streetAddress}
+                onChangeText={(value) => setStreetAddress(value)}
+              />
+
+              <Text style={Styles.labelText}>City:</Text>
+              <UserInput
+                placeholder="0"
+                value={city}
+                onChangeText={(value) => setCity(value)}
+              />
+
+              <Text style={Styles.labelText}>State:</Text>
+              <UserInput
+                placeholder="0"
+                value={state}
+                onChangeText={(value) => setState(value)}
+              />
+
+              <Text style={Styles.labelText}>Country:</Text>
+              <UserInput
+                placeholder="0"
+                value={country}
+                onChangeText={(value) => setCountry(value)}
+              />
+
+              <Text style={Styles.labelText}>pinCode:</Text>
+              <UserInput
+                placeholder="0"
+                value={pinCode}
+                onChangeText={(value) => setPinCode(value)}
+              />
+            </View>
+
+
+            {/* Restaurant cordinates (latitude  longitude) */}
+            <View>
+              <Text style={Styles.labelText}>Restaurant Cordinates:</Text>
+              <View>
+                <Text style={Styles.labelText}>Latitude:</Text>
+                <UserInput
+                  placeholder="0"
+                  value={latitude}
+                  onChangeText={(value) => setLatitude(value)}
+                />
+              </View>
+              <View>
+                <Text style={Styles.labelText}>Longitude:</Text>
+                <UserInput
+                  placeholder="0"
+                  value={longitude}
+                  onChangeText={(value) => setLongitude(value)}
+                />
+              </View>
+            </View>
           </View>
         )}
+
         <Buttons
           title={"Save Settings"}
           onPress={() => Alert.alert("Save successfully!!!!")}
@@ -119,5 +185,12 @@ const Styles = StyleSheet.create({
   labelText: {
     fontSize: 18,
     color: "grey",
+  },
+
+  // Showing conifgure delivery settings
+  configureDelivery: {
+    backgroundColor: "red",
+    overflow:"scroll"
+
   },
 });
