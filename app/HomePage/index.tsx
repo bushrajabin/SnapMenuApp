@@ -8,10 +8,7 @@ const logoimage = require("../../assets/images/snapLogo.png");
 export default function HomePage() {
   return (
     <SafeAreaView style={Styles.container}>
-      <View style={Styles.TopContainer}>
-        <Image source={logoimage} style={Styles.logoImage} />
-        <NavSideBar title="" />
-      </View>
+      <NavSideBar title="" />
       <Text style={Styles.Text}>Available Menus</Text>
       <TouchableOpacity style={Styles.button}>
         <Buttons
@@ -28,19 +25,6 @@ const Styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
     flex: 1,
-    zIndex:-1,
-    elevation:0
-  },
-  TopContainer: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  logoImage: {
-    width: "60%",
-    height:"100%",
-    objectFit: "contain",
   },
   Text: {
     textDecorationLine: "underline",
@@ -54,7 +38,5 @@ const Styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     margin: "auto",
-    elevation:1,
-    zIndex:1
   },
 });

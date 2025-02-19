@@ -25,10 +25,6 @@ const Styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 10,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 8,
-    shadowRadius: 2,
     backgroundColor:"black",
   },
   buttonText: {
