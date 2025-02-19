@@ -1,11 +1,11 @@
-import { View, Text, StyleSheet, Alert, TextInput } from "react-native";
+import { View, Text, StyleSheet, Alert, SafeAreaView } from "react-native";
 import React, { useState } from "react";
 import ToggleSwitch from "toggle-switch-react-native";
 import NavSideBar from "@/components/NavSideBar";
 import Buttons from "@/components/Buttons";
 import UserInput from "@/components/UserInput";
-import { SafeAreaView } from "react-native-safe-area-context";
-
+import GetLocation from "@/components/getLocation";
+import { TouchableOpacity } from "react-native";
 const InHouseDelivery = () => {
   const [houseDeliver, setHouseDeliver] = useState<boolean>(false);
   const [isConfigure, setIsConfigure] = useState<boolean>(false);
@@ -13,13 +13,13 @@ const InHouseDelivery = () => {
   const [orderValue, setOrderValue] = useState<number>();
 
   const [deliveryRadius, setDeliveryRadius] = useState<number>();
-
   const [deliveryHour, setDeliveryHour] = useState<string>("");
 
   return (
     <SafeAreaView style={Styles.mainContainer}>
       <NavSideBar title={"In-House Delivery"} />
       <View style={[Styles.topContainer, Styles.boxWithShadow]}>
+
         <Text style={Styles.text1}>Configure Delivery Settings</Text>
         <Text style={Styles.text2}>Enable Delivery:</Text>
         <ToggleSwitch
@@ -66,7 +66,9 @@ const InHouseDelivery = () => {
               />
             </View>
             {/* Location settings */}
-            <View></View>
+            <TouchableOpacity>
+              <GetLocation />  
+              </TouchableOpacity>
           </View>
         )}
         <Buttons
@@ -84,7 +86,7 @@ export default InHouseDelivery;
 const Styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "white",
   },
   topContainer: {
     backgroundColor: "white",

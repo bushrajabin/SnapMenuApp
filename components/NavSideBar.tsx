@@ -46,7 +46,7 @@ const SideBarItems: Items[] = [
 
 export default function NavSideBar({ title }: { title: string }) {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
-  const [sidebarAnim] = useState(new Animated.Value(300));
+  const [sidebarAnim] = useState(new Animated.Value(300)); // Initially hide sidebar off-screen (right side)
   const pathname = usePathname();
 
   // Toggle Sidebar visibility
@@ -237,3 +237,4 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
+

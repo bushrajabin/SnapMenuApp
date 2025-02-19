@@ -40,7 +40,6 @@ export default function RestaurantSettingPage() {
   return (
     <SafeAreaView style= {Styles.mainContainer}>
       <NavSideBar title={"Restaurant Setting"} />
-      <View style={Styles.mainContainer}>
         {/* <NavBar title={"Restaurant Settings"} /> */}
         <View style={Styles.itemContainer}>
           {RestaurentSetting.map((item, index) => {
@@ -71,7 +70,6 @@ export default function RestaurantSettingPage() {
             />
           </View>
         </View>
-      </View>
    </SafeAreaView>
   );
 }

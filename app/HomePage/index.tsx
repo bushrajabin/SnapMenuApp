@@ -7,6 +7,7 @@ import NavSideBar from "@/components/NavSideBar";
 const logoimage = require("../../assets/images/snapLogo.png");
 export default function HomePage() {
   return (
+
     <SafeAreaView style={Styles.container}>
       <NavSideBar title="" />
       <Text style={Styles.Text}>Available Menus</Text>
@@ -16,7 +17,6 @@ export default function HomePage() {
           onPress={() => router.navigate("/AddMenu")}
         />
       </TouchableOpacity>
-
     </SafeAreaView>
   );
 }

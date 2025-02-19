@@ -124,7 +124,7 @@ export default function TableManagementScreen() {
 const styles = StyleSheet.create({
   container: {
    flex: 1,
-    backgroundColor: "red"
+    backgroundColor: "white",
   },
   addTables: {
     textDecorationLine: "underline",
