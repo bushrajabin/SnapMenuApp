@@ -4,8 +4,19 @@ import ToggleSwitch from "toggle-switch-react-native";
 import NavSideBar from "@/components/NavSideBar";
 import Buttons from "@/components/Buttons";
 import UserInput from "@/components/UserInput";
-import { TouchableOpacity } from "react-native";
 import UserLocation from "@/components/UserLocation";
+import { ScrollView } from "react-native";
+
+// TypeScript types for state
+interface LocationData {
+  street: string | null;
+  city: string | null;
+  state: string | null;
+  country: string | null;
+  latitude: number;
+  longitude: number;
+}
+
 const InHouseDelivery = () => {
   const [houseDeliver, setHouseDeliver] = useState<boolean>(false);
   const [isConfigure, setIsConfigure] = useState<boolean>(false);
@@ -22,10 +33,21 @@ const InHouseDelivery = () => {
   const [longitude, setLongitude] = useState<number>(0)
 
 
+
+  // ---
+
+  const handleLocationFetched = (locationData: LocationData) => {
+    setLatitude(locationData.latitude);
+    setLongitude(locationData.longitude);
+    setStreetAddress(locationData.street || "");
+    setCity(locationData.city || "");
+    setState(locationData.state || "");
+    setCountry(locationData.country || "");
+  };
   return (
     <SafeAreaView style={Styles.mainContainer}>
       <NavSideBar title={"In-House Delivery"} />
-      <View style={[Styles.topContainer, Styles.boxWithShadow]}>
+      <ScrollView style={[Styles.topContainer, Styles.boxWithShadow]}>
 
         <Text style={Styles.text1}>Configure Delivery Settings</Text>
         <Text style={Styles.text2}>Enable Delivery:</Text>
@@ -33,16 +55,15 @@ const InHouseDelivery = () => {
           isOn={isConfigure}
           onColor="green"
           offColor="#ecf0f1"
-          size="medium"
+          size="small"
           onToggle={(isOn) => {
             setIsConfigure(isOn);
-            console.log("changed to:", isOn);
           }}
         />
 
         {/* if ToggleSwitch is on then shwoing thiss */}
         {isConfigure && (
-          <View style={Styles.configureDelivery}>
+          <View style={Styles.deliveryFields} >
             <View>
               <Text style={Styles.labelText}>Delivery Fee (₹)</Text>
               <UserInput
@@ -75,73 +96,80 @@ const InHouseDelivery = () => {
 
             {/* Location settings */}
             <View>
-              <UserLocation />
-
+              <Text style={Styles.locationSettingsText}>Location Settings</Text>
+              <UserLocation onLocationFetched={handleLocationFetched} />
               <Text style={Styles.labelText}>Street Address:</Text>
               <UserInput
-                placeholder="0"
+                placeholder=""
                 value={streetAddress}
                 onChangeText={(value) => setStreetAddress(value)}
               />
 
               <Text style={Styles.labelText}>City:</Text>
               <UserInput
-                placeholder="0"
+                placeholder=""
                 value={city}
                 onChangeText={(value) => setCity(value)}
               />
 
               <Text style={Styles.labelText}>State:</Text>
               <UserInput
-                placeholder="0"
+                placeholder=""
                 value={state}
                 onChangeText={(value) => setState(value)}
               />
 
               <Text style={Styles.labelText}>Country:</Text>
               <UserInput
-                placeholder="0"
+                placeholder=""
                 value={country}
                 onChangeText={(value) => setCountry(value)}
               />
 
-              <Text style={Styles.labelText}>pinCode:</Text>
+              <Text style={Styles.labelText}>PinCode:</Text>
               <UserInput
-                placeholder="0"
+                placeholder=""
                 value={pinCode}
                 onChangeText={(value) => setPinCode(value)}
               />
+
+              {/* Restaurant cordinates (latitude  longitude) */}
+              <View style={Styles.restaurentCordinates}>
+                <Text style={Styles.labelText}>Restaurant Cordinates:</Text>
+                <View style={Styles.latitudeLongitudeContainer}>
+                  <View style={Styles.latitudelongitude}>
+                    <Text style={Styles.labelText}>Latitude:</Text>
+                    <UserInput
+                      placeholder="0"
+                      value={latitude.toString()}
+                      onChangeText={(value) => setLatitude(Number(value))}
+                    />
+                  </View>
+                  <View style={Styles.latitudelongitude}>
+                    <Text style={Styles.labelText}>Longitude:</Text>
+                    <UserInput
+                      placeholder="0"
+                      value={longitude.toString()}
+                      onChangeText={(value) => setLongitude(Number(value))}
+                    />
+                  </View>
+                </View>
+              </View>
             </View>
 
 
-            {/* Restaurant cordinates (latitude  longitude) */}
-            <View>
-              <Text style={Styles.labelText}>Restaurant Cordinates:</Text>
-              <View>
-                <Text style={Styles.labelText}>Latitude:</Text>
-                <UserInput
-                  placeholder="0"
-                  value={latitude}
-                  onChangeText={(value) => setLatitude(value)}
-                />
-              </View>
-              <View>
-                <Text style={Styles.labelText}>Longitude:</Text>
-                <UserInput
-                  placeholder="0"
-                  value={longitude}
-                  onChangeText={(value) => setLongitude(value)}
-                />
-              </View>
-            </View>
           </View>
-        )}
 
-        <Buttons
-          title={"Save Settings"}
-          onPress={() => Alert.alert("Save successfully!!!!")}
-        />
-      </View>
+
+        )}
+        <View style={Styles.Button}>
+          <Buttons
+            title={"Save Settings"}
+            onPress={() => Alert.alert("Save successfully!!!!")}
+          />
+        </View>
+
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -158,7 +186,7 @@ const Styles = StyleSheet.create({
     backgroundColor: "white",
     paddingHorizontal: 20,
     paddingVertical: 20,
-    marginTop: 40,
+    marginTop: 20,
   },
   text1: {
     fontWeight: "bold",
@@ -170,7 +198,7 @@ const Styles = StyleSheet.create({
     fontSize: 17,
     color: "grey",
     paddingVertical: 5,
-    fontWeight: 600,
+    fontWeight: 400,
   },
   boxWithShadow: {
     shadowColor: "#000",
@@ -183,14 +211,45 @@ const Styles = StyleSheet.create({
     backgroundColor: "red",
   },
   labelText: {
-    fontSize: 18,
+    fontSize: 14,
     color: "grey",
+    paddingHorizontal: 14,
+    fontWeight: 500
   },
 
-  // Showing conifgure delivery settings
-  configureDelivery: {
-    backgroundColor: "red",
-    overflow:"scroll"
+  Button: {
+    borderRadius: 10,
+    marginVertical: 20,
+    marginBottom: 20,
+    marginHorizontal: 90,
+    alignItems: "center",
+    paddingBottom: 10
+  },
+  // IsConfigure styling
+  deliveryFields: {
+    paddingTop: 30
+  },
 
+  // Location settings styling
+  locationSettingsText: {
+    paddingHorizontal: 10,
+    fontWeight: 600,
+    fontSize: 16,
+    color: "grey"
+  },
+  // latitude& longitude styling
+  restaurentCordinates: {
+    backgroundColor: "#f9fafb",
+    borderRadius: 7,
+    margin: 2,
+    padding: 4
+  },
+  latitudeLongitudeContainer: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  latitudelongitude: {
+    width: "50%"
   },
 });
