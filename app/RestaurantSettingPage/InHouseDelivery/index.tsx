@@ -5,6 +5,7 @@ import NavSideBar from "@/components/NavSideBar";
 import Buttons from "@/components/Buttons";
 import UserInput from "@/components/UserInput";
 import UserLocation from "@/components/UserLocation";
+import DeliveryHoursPicker from "@/components/DeliveryHoursPicker";
 import { ScrollView } from "react-native";
 
 // TypeScript types for state
@@ -18,7 +19,6 @@ interface LocationData {
 }
 
 const InHouseDelivery = () => {
-  const [houseDeliver, setHouseDeliver] = useState<boolean>(false);
   const [isConfigure, setIsConfigure] = useState<boolean>(false);
   const [deliveryFee, setDeliveryFee] = useState<number>();
   const [orderValue, setOrderValue] = useState<number>();
@@ -34,8 +34,7 @@ const InHouseDelivery = () => {
 
 
 
-  // ---
-
+  // ---update location data
   const handleLocationFetched = (locationData: LocationData) => {
     setLatitude(locationData.latitude);
     setLongitude(locationData.longitude);
@@ -85,13 +84,8 @@ const InHouseDelivery = () => {
                 value={deliveryRadius}
                 onChangeText={(value) => setDeliveryRadius(value)}
               />
-
-              <Text style={Styles.labelText}>Delivery Hours:</Text>
-              <UserInput
-                placeholder="0"
-                value={deliveryHour}
-                onChangeText={(value) => setDeliveryHour(value)}
-              />
+              {/* Delivery hours time */}
+              <DeliveryHoursPicker />
             </View>
 
             {/* Location settings */}

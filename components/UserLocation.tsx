@@ -23,12 +23,9 @@ const UserLocation: React.FC<UserLocationProps> = ({ onLocationFetched }) => {
             alert('Permission to access location was denied');
             return;
         }
-
-        // Get the current position
+        // Get the current position from user
         let location = await Location.getCurrentPositionAsync({});
-
         const { latitude, longitude } = location.coords;
-
         // Reverse Geocode to get street and state
         let address = await Location.reverseGeocodeAsync({ latitude, longitude });
         if (address.length > 0) {
@@ -43,7 +40,6 @@ const UserLocation: React.FC<UserLocationProps> = ({ onLocationFetched }) => {
             });
         }
     };
-
     return (
         <TouchableOpacity style={styles.mainContainer} onPress={getLocation}>
             <EvilIcons name="location" size={20} color="black" />
