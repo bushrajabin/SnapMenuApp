@@ -43,6 +43,34 @@ const InHouseDelivery = () => {
     setState(locationData.state || "");
     setCountry(locationData.country || "");
   };
+
+
+  // Save user settings---
+  const saveSetting = () => {
+    // Check if all the required fields are filled
+    if (
+      !deliveryFee ||
+      !orderValue ||
+      !deliveryRadius ||
+      !deliveryHour ||
+      !streetAddress ||
+      !city ||
+      !state ||
+      !country ||
+      !pinCode||
+      latitude === 0 ||
+      longitude === 0
+    ) {
+      Alert.alert(
+        "Please fill in all the required fields before saving & enable location."
+      );
+    }
+
+    else {
+      Alert.alert("Settings Saved", "Your delivery settings have been saved successfully.");
+    }
+  };
+
   return (
     <SafeAreaView style={Styles.mainContainer}>
       <NavSideBar title={"In-House Delivery"} />
@@ -159,7 +187,7 @@ const InHouseDelivery = () => {
         <View style={Styles.Button}>
           <Buttons
             title={"Save Settings"}
-            onPress={() => Alert.alert("Save successfully!!!!")}
+            onPress={saveSetting}
           />
         </View>
 

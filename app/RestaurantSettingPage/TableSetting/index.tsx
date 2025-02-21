@@ -15,10 +15,10 @@ import Buttons from "@/components/Buttons";
 import NavSideBar from "@/components/NavSideBar";
 
 export default function TableManagementScreen() {
-  const [tableCount, setTableCount] = useState<string>(""); // Input value as a string
-  const [tableList, setTableList] = useState<string[]>([]); // List of tables
-  const [selectedQR, setSelectedQR] = useState<string | null>(null); // Selected QR for preview
-  const [isModalVisible, setIsModalVisible] = useState(false); // Modal visibility
+  const [tableCount, setTableCount] = useState<string>();
+  const [tableList, setTableList] = useState<string[]>([]);
+  const [selectedQR, setSelectedQR] = useState<string | null>(null);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   // Generate tables based on input
   const handleGenerateTables = () => {
@@ -110,7 +110,7 @@ export default function TableManagementScreen() {
           </View>
         </Modal>
       )}
-      <TouchableOpacity style={styles.downloadQRButton}>
+      <TouchableOpacity style={styles.downloadAllQRButton}>
         <Buttons
           title={"Download All"}
           onPress={() => Alert.alert("successfully!!!")}
@@ -123,7 +123,7 @@ export default function TableManagementScreen() {
 // Styles
 const styles = StyleSheet.create({
   container: {
-   flex: 1,
+    flex: 1,
     backgroundColor: "white",
   },
   addTables: {
@@ -139,17 +139,17 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#ccc",
     borderRadius: 5,
-    // padding: 10,
-    // marginBottom: 10,
-    // marginHorizontal: 20,
+    marginBottom: 10,
+    marginHorizontal: 20,
+    paddingLeft: 7
   },
   buttonContainer: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    // marginBottom: 20,
-    // marginTop: 20,
+    marginBottom: 20,
+    marginTop: 20,
   },
   cancelButton: {
     backgroundColor: "#f0f0f0",
@@ -158,8 +158,8 @@ const styles = StyleSheet.create({
     borderColor: "grey",
     borderWidth: 2,
     fontWeight: "bold",
-    // paddingHorizontal: 40,
-    // paddingVertical: 10,
+    paddingHorizontal: 40,
+    paddingVertical: 10,
   },
   tableList: {
     // marginTop: 10,
@@ -172,7 +172,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: "#ccc",
     paddingVertical: 15,
-    // marginBottom: 10,
   },
   tableNumber: {
     fontWeight: "bold",
@@ -230,10 +229,10 @@ const styles = StyleSheet.create({
     color: "red",
     fontWeight: "bold",
   },
-  downloadQRButton: {
+  downloadAllQRButton: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
-    // paddingVertical: 20,
+    paddingVertical: 20,
   },
 });
