@@ -11,40 +11,16 @@ const logoImage = require("../../assets/images/snapmenuDark.png");
 import { useRouter } from "expo-router";
 import Buttons from "@/components/Buttons";
 import UserInput from "@/components/UserInput";
-import AntDesign from '@expo/vector-icons/AntDesign';
-import GoogleAuth from "@/components/GoogleAuth";
 import { SafeAreaView } from "react-native-safe-area-context";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
-export default function Login() {
+function Login() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<any>("");
   const router = useRouter();
 
-  // Check if user is already logged in
-  useEffect(() => {
-    const checkLogin = async () => {
-      const user = await AsyncStorage.getItem("user");
-      if (user) {
-        // If user is logged in, navigate to home otherwise login page
-        router.push("/HomePage");
-      }
-    };
-    checkLogin();
-  }, [router]);
 
   // handle login and save user info in asyncStorage 
   const handleLogin = () => {
-    if (email && password) {
-      AsyncStorage.setItem("user", email);
-      Alert.alert("Success", `Welcome back, ${email}!`);
-      if (email === email) {
-        router.push("/HomePage");
-      }
-      router.push("/RegisterRestaurant");
-    } else {
-      Alert.alert("Error", "Please fill in both fields.");
-    }
+router.navigate("/HomePage")
   };
   return (
     <SafeAreaView style={styles.container}>
@@ -77,10 +53,6 @@ export default function Login() {
         {/* Social Login Options */}
         <View style={styles.continueWithContainer}>
           <Text style={styles.continueWith}>------Or continue with------</Text>
-          <TouchableOpacity style={styles.GoogleIcon}>
-            <AntDesign name="google" size={24} color="black" />
-            <Text style={styles.googleText}><GoogleAuth /></Text>
-          </TouchableOpacity>
 
           {/* Create New Account Option */}
           <TouchableOpacity onPress={() => router.push("/Registration")}>
@@ -92,6 +64,7 @@ export default function Login() {
   );
 }
 
+export default Login
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "black",
@@ -161,3 +134,4 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 });
+

@@ -13,16 +13,11 @@ import {
 } from "react-native";
 import Buttons from "@/components/Buttons";
 import NavSideBar from "@/components/NavSideBar";
-
-import QRCode from 'react-native-qrcode-svg';
-
 export default function TableManagementScreen() {
   const [tableCount, setTableCount] = useState<string>();
   const [tableList, setTableList] = useState<string[]>([]);
   const [selectedQR, setSelectedQR] = useState<string | null>(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  // const [qrValue, setQRValue] = useState('');
-
 
   // Generate tables based on input
   const handleGenerateTables = () => {
@@ -100,11 +95,6 @@ export default function TableManagementScreen() {
               <Text style={styles.modalTitle}>{selectedQR}</Text>
               <View style={styles.qrContainer}>
                 {/* <Text>QR Code Here!!!</Text> */}
-                <QRCode
-                  value=""
-                  size={200}
-                  color="black"
-                  backgroundColor="white" />
               </View>
               <TouchableOpacity style={styles.downloadButton}>
                 <Text style={styles.downloadButtonText}>Download QR</Text>

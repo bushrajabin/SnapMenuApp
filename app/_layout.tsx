@@ -1,13 +1,17 @@
 import GlobalStyle from "@/components/GlobalStyle";
 import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
+import { Stack, usePathname } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
-import { StatusBar } from "expo-status-bar";
-import { useEffect, useState } from "react";
-import { SafeAreaView } from "react-native";
-import { usePathname } from "expo-router";  // Import usePathname
+import { useEffect } from "react";
+import {
+  SafeAreaView,
+  Platform,
+  StatusBar as RNStatusBar,
+  View,
+  StatusBar,
+} from "react-native";
 
-// Prevent splash screen from hiding automatically
+// Prevent splash screen from auto hiding
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
@@ -25,37 +29,51 @@ export default function RootLayout() {
     return null;
   }
 
-  return (
-    <ThemedApp />
-  );
+  return <ThemedApp />;
 }
 
 function ThemedApp() {
-  const pathname = usePathname();  // Use the current path name
-  // Check if the current route is 'login' or 'registration'
-  const isLoginOrRegister = pathname?.includes('Login') || pathname?.includes('Registration');
-  // Set background color dynamically based on the page
+  const pathname = usePathname();
+
+  const isLoginOrRegister =
+    pathname?.toLowerCase().includes("login") ||
+    pathname?.toLowerCase().includes("registration");
+
   const backgroundColor = isLoginOrRegister ? "black" : "white";
- // Status bar style: dark for light background, light for dark background
-  const statusBarStyle = backgroundColor === "black" ? "light" : "dark";
+  const barStyle = backgroundColor === "black" ? "light-content" : "dark-content";
 
   return (
-    <SafeAreaView
-      style={[
-        GlobalStyle.androidSafeArea,
-        { backgroundColor },
-      ]}
-    >
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="(tabs)" />
-        <Stack.Screen name="+not-found" />
-      </Stack>
+    <>
+      {/* Background View under StatusBar */}
+      {Platform.OS === "android" && (
+        <View
+          style={{
+            height: RNStatusBar.currentHeight,
+            backgroundColor,
+          }}
+        />
+      )}
 
-      {/* StatusBar Color Changes Dynamically */}
+      {/* Actual app UI */}
+      <SafeAreaView
+        style={[
+          GlobalStyle.androidSafeArea,
+          { flex: 1, backgroundColor },
+        ]}
+      >
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="index"/>
+          <Stack.Screen name="(tabs)" />
+          <Stack.Screen name="+not-found" />
+        </Stack>
+      </SafeAreaView>
+
+      {/* Native StatusBar (not expo-status-bar) */}
       <StatusBar
-        style={statusBarStyle}
-        backgroundColor={backgroundColor}
+        translucent
+        backgroundColor="transparent"
+        barStyle={barStyle}
       />
-    </SafeAreaView>
+    </>
   );
 }

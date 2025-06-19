@@ -23,7 +23,7 @@ const UserLocation: React.FC<UserLocationProps> = ({ onLocationFetched }) => {
             alert('Permission to access location was denied');
             return;
         }
-       
+
         // Get the current position from user
         let location = await Location.getCurrentPositionAsync({});
         const { latitude, longitude } = location.coords;

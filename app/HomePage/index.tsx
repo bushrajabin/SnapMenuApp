@@ -1,5 +1,5 @@
 import { router } from "expo-router";
-import { SafeAreaView, Text, View, Image } from "react-native";
+import { SafeAreaView, Text, View, Image} from "react-native";
 import { StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native";
 import Buttons from "@/components/Buttons";

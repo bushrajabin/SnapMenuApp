@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, SafeAreaView, Text, StyleSheet } from "react-native";
+import { View, SafeAreaView, Text, StyleSheet, Alert } from "react-native";
 import { TouchableOpacity } from "react-native";
 import { router } from "expo-router";
 import UserInput from "@/components/UserInput";
@@ -13,7 +13,7 @@ export default function RegisterRestaurant() {
 
   const toHomePage = () => {
     if (!UserName || !City || !RestaurentName || !GST) {
-      console.log("0ooppss");
+    Alert.alert("0ooppss");
     } else {
       router.navigate("/HomePage");
     }
@@ -48,7 +48,7 @@ export default function RegisterRestaurant() {
           />
         </View>
 
-        <TouchableOpacity>
+        <TouchableOpacity style={Styles.button} >
           <Buttons title={"Get Started"} onPress={toHomePage} />
         </TouchableOpacity>
       </View>
@@ -73,4 +73,8 @@ const Styles = StyleSheet.create({
     color: "green",
     fontSize: 30,
   },
+  button:{
+    marginHorizontal:50,
+    marginTop:40
+  }
 });
